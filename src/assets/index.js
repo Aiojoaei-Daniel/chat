@@ -1,14 +1,12 @@
-export { default as florin } from "./Images/flo.jpg";
-export { default as ana } from "./Images/ana.jpg";
-export { default as dan } from "./Images/dan.jpg";
-export { default as marian } from "./Images/marian.jpg";
-export { default as calin } from "./Images/calin.jpg";
-export { default as vlad } from "./Images/vlad.jpg";
-export { default as chatIcon1 } from "./Images/chat2.svg";
-export { default as chatIcon2 } from "./Images/chat3.svg";
-export { default as bgImg1 } from "./Images/messages.png";
-export { default as bgImg2 } from "./Images/messages1.png";
-export { default as bgImg3 } from "./Images/messages3.png";
-export { default as add } from "./Images/plus.svg";
-export { default as send } from "./Images/send.svg";
-export { default as logout } from "./Images/logout.svg";
+export { default as florin } from "./ProfilPics/florin.jpg";
+export { default as ana } from "./ProfilPics/ana.jpg";
+export { default as dan } from "./ProfilPics/dan.jpg";
+export { default as marian } from "./ProfilPics/marian.jpg";
+export { default as calin } from "./ProfilPics/calin.jpg";
+export { default as vlad } from "./ProfilPics/vlad.jpg";
+export { default as maria } from "./ProfilPics/maria.jpg";
+export { default as roxana } from "./ProfilPics/roxana.jpg";
+
+export { default as add } from "./Icons/add.svg";
+export { default as send } from "./Icons/send.svg";
+export { default as logout } from "./Icons/logout.svg";

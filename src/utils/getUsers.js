@@ -1,4 +1,13 @@
-import { florin, ana, dan, marian, calin, vlad } from "../assets";
+import {
+  florin,
+  ana,
+  dan,
+  marian,
+  calin,
+  vlad,
+  maria,
+  roxana,
+} from "../assets";
 
 export const getUsers = () => {
   const users = [
@@ -33,24 +42,14 @@ export const getUsers = () => {
       picture: vlad,
     },
     {
-      name: "Vlad",
+      name: "Maria",
       id: 7,
-      picture: vlad,
+      picture: maria,
     },
     {
-      name: "Vlad",
+      name: "Roxana",
       id: 8,
-      picture: vlad,
-    },
-    {
-      name: "Vlad",
-      id: 9,
-      picture: vlad,
-    },
-    {
-      name: "Vlad",
-      id: 10,
-      picture: vlad,
+      picture: roxana,
     },
   ];
 

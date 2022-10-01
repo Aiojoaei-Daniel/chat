@@ -1,6 +1,6 @@
 import React from "react";
 
-import { chatIcon2, change1, logout } from "../../../assets";
+import { logout } from "../../../assets";
 import "./options.css";
 
 const Options = ({ currentUser, setCurrentUser, setSelectedUser }) => {
@@ -15,8 +15,8 @@ const Options = ({ currentUser, setCurrentUser, setSelectedUser }) => {
         {/* <img src={chatIcon2} alt="" />
         <p>CHAT</p> */}
         <div className="current-user-info">
-          <img src={currentUser.picture} alt="" />
-          <p>{currentUser.name}</p>
+          <img src={currentUser?.picture} alt="" />
+          <p>{currentUser?.name}</p>
         </div>
       </div>
       <div className="options">
