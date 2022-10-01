@@ -14,6 +14,15 @@ const UsersSidebar = ({
     filteredUsers = users.filter((user) => user.id !== currentUser.id);
   }
 
+  const handleSelectedUser = (user) => {
+    console.log(user?.name, selectedUser?.name);
+    if (user?.name === selectedUser?.name) {
+      setSelectedUser();
+    } else {
+      setSelectedUser(user);
+    }
+  };
+
   return (
     <div className="sidebar">
       <div className="search-bar"></div>
@@ -23,7 +32,7 @@ const UsersSidebar = ({
             <div
               key={user.id}
               className="sidebar-user"
-              onClick={() => setSelectedUser(user)}
+              onClick={() => handleSelectedUser(user)}
               style={{
                 backgroundColor:
                   user?.name === selectedUser?.name ? "#3c374c" : null,

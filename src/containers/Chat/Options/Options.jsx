@@ -11,25 +11,28 @@ const Options = ({ currentUser, setCurrentUser, setSelectedUser }) => {
 
   return (
     <div className="options-container">
-      <div className="sidebar-header">
-        {/* <img src={chatIcon2} alt="" />
-        <p>CHAT</p> */}
+      {currentUser ? (
         <div className="current-user-info">
           <img src={currentUser?.picture} alt="" />
           <p>{currentUser?.name}</p>
         </div>
-      </div>
-      <div className="options">
-        <p>
-          <b>+</b> New Conversation
-        </p>
-        <p>Chat</p>
-        <p>Contacts</p>
-        <p>Deleted</p>
-        <p>Favorite</p>
-        <p>Setting</p>
-        <p>About us</p>
-      </div>
+      ) : (
+        <div>
+          <img src="" alt="" />
+          <p>CHAT</p>
+        </div>
+      )}
+      {currentUser ? (
+        <div className="options">
+          <p>New Conversation</p>
+          <p>Chat</p>
+          <p>Contacts</p>
+          <p>Deleted</p>
+          <p>Favorite</p>
+          <p>Setting</p>
+          <p>About us</p>
+        </div>
+      ) : null}
       {currentUser ? (
         <div className="logout" onClick={handleUser}>
           <img src={logout} alt="" onClick={handleUser} />
