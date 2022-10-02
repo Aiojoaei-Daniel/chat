@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 
+import { search } from "../../../assets";
 import "./usersSidebar.css";
 
 const UsersSidebar = ({
@@ -15,6 +16,8 @@ const UsersSidebar = ({
     filteredUsers = users.filter((user) => user.id !== currentUser.id);
   }
 
+  const [searchValue, setSearchValue] = useState("");
+
   const handleSelectedUser = (user) => {
     console.log(user?.name, selectedUser?.name);
     if (user?.name === selectedUser?.name) {
@@ -23,13 +26,28 @@ const UsersSidebar = ({
       setSelectedUser(user);
     }
   };
-  console.log("messages de aici de la mn", messages);
+
+  const sortedUsers = filteredUsers.filter((user) =>
+    user.name.toLowerCase().includes(searchValue.toLowerCase())
+  );
+
   return (
     <div className="sidebar">
-      <div className="search-bar"></div>
+      <div className="search-bar">
+        <input
+          type="text"
+          name="search-bar"
+          className="search-input"
+          placeholder="Search here"
+          onChange={(event) => setSearchValue(event.target.value)}
+        />
+        <div className="search-icon">
+          <img src={search} alt="search" />
+        </div>
+      </div>
       <div className="sidebar-users">
-        {filteredUsers.length !== 0 ? (
-          filteredUsers.map((user) => (
+        {sortedUsers.length !== 0 ? (
+          sortedUsers.map((user) => (
             <div
               key={user.id}
               className="sidebar-user"
@@ -43,14 +61,26 @@ const UsersSidebar = ({
                 <img src={user?.picture} alt="poza" />
                 <p>{user?.name}</p>
                 <p className="time">
-                  {messages.hasOwnProperty(user.id + currentUser.id)
+                  {messages.hasOwnProperty(user.id + currentUser.id) &&
+                  (messages[user.id + currentUser.id][
+                    messages[user.id + currentUser.id].length - 1
+                  ].sender === currentUser?.name ||
+                    messages[user.id + currentUser.id][
+                      messages[user.id + currentUser.id].length - 1
+                    ].sender === selectedUser?.name)
                     ? messages[user.id + currentUser.id][
                         messages[user.id + currentUser.id]?.length - 1
                       ]?.time
                     : null}
                 </p>
               </div>
-              {messages.hasOwnProperty(user.id + currentUser.id) ? (
+              {messages.hasOwnProperty(user.id + currentUser.id) &&
+              (messages[user.id + currentUser.id][
+                messages[user.id + currentUser.id].length - 1
+              ].sender === currentUser?.name ||
+                messages[user.id + currentUser.id][
+                  messages[user.id + currentUser.id].length - 1
+                ].sender === selectedUser?.name) ? (
                 <p>
                   {
                     messages[user.id + currentUser.id][

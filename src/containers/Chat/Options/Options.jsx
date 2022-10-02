@@ -2,6 +2,7 @@ import React from "react";
 
 import {
   chat,
+  chatIcon,
   contact,
   favorite,
   info,
@@ -12,9 +13,15 @@ import {
 } from "../../../assets";
 import "./options.css";
 
-const Options = ({ currentUser, setCurrentUser, setSelectedUser }) => {
+const Options = ({
+  currentUser,
+  setCurrentUser,
+  setSelectedUser,
+  setMessages,
+}) => {
   const handleUser = () => {
     setSelectedUser();
+    setMessages({});
     setCurrentUser();
   };
 
@@ -26,9 +33,9 @@ const Options = ({ currentUser, setCurrentUser, setSelectedUser }) => {
           <p>{currentUser?.name}</p>
         </div>
       ) : (
-        <div>
-          <img src="" alt="" />
-          <p>CHAT</p>
+        <div className="chat-logo">
+          <img src={chatIcon} alt="chat-icon" />
+          <p style={{ color: "white" }}>CHAT</p>
         </div>
       )}
       {currentUser ? (

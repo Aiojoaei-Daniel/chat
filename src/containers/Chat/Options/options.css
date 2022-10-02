@@ -39,6 +39,13 @@
   color: white;
 }
 
+.chat-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 10vh;
+}
+
 .logout {
   width: 90%;
   height: 60px;

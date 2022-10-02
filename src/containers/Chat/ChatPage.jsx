@@ -25,6 +25,7 @@ const ChatPage = () => {
         currentUser={currentUser}
         setCurrentUser={setCurrentUser}
         setSelectedUser={setSelectedUser}
+        setMessages={setMessages}
       />
       <UsersSidebar
         users={users}

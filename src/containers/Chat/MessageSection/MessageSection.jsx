@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 
-import { add, send } from "../../../assets";
+import { add, send, usersIcon, phone, video, more } from "../../../assets";
 import "./messageSection.css";
 
 const MessageSection = ({
@@ -98,6 +98,7 @@ const MessageSection = ({
         <div className="container-users">
           <div className="users-title">
             <p>Users</p>
+            <img src={usersIcon} alt="users icon" />
           </div>
           <div className="select-user">
             {users.map((user, index) => (
@@ -111,8 +112,15 @@ const MessageSection = ({
         <div className="chat-section">
           {selectedUser ? (
             <div className="selected-user-info">
-              <img src={selectedUser?.picture} alt="" />
-              <p>{selectedUser?.name}</p>
+              <div className="info">
+                <img src={selectedUser?.picture} alt="" />
+                <p>{selectedUser?.name}</p>
+              </div>
+              <div className="contact-friend">
+                <img src={phone} alt="" />
+                <img src={video} alt="" />
+                <img src={more} alt="" />
+              </div>
             </div>
           ) : null}
           <div
