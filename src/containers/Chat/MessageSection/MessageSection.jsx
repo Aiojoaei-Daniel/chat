@@ -9,10 +9,10 @@ const MessageSection = ({
   selectedUser,
   currentUser,
   setCurrentUser,
+  messages,
+  setMessages,
 }) => {
   const [message, setMessage] = useState({});
-
-  const [messages, setMessages] = useState({});
   const dummy = useRef();
 
   const onStorageUpdate = (storageData) => {
@@ -54,7 +54,16 @@ const MessageSection = ({
 
   const handleMessage = (event) => {
     const message = event.target.value;
-    setMessage({ sender: currentUser.name, text: message });
+    const time = new Date();
+    let [hours, minutes] = ["", ""];
+    console.log(typeof time.getHours());
+    if (time.getHours() < 10) hours = "0";
+    if (time.getMinutes() < 10) minutes = "0";
+    setMessage({
+      sender: currentUser.name,
+      text: message,
+      time: `${hours}${time.getHours()}:${minutes}${time.getMinutes()}`,
+    });
   };
 
   const handleSendMessage = (event) => {
@@ -147,6 +156,7 @@ const MessageSection = ({
                         <p>{message?.text}</p>
                       </div>
                     ) : null}
+                    <p>{message?.time}</p>
                   </div>
                 )
               )
@@ -167,14 +177,16 @@ const MessageSection = ({
                 type="text"
                 name=""
                 onChange={handleMessage}
+                placeholder="Type a message..."
                 value={Object.keys(message).length !== 0 ? message.text : ""}
               />
               <button className="send" type="submit" disabled={!message.text}>
-                <img src={send} alt="send icon" />
+                <img
+                  src={send}
+                  alt="send icon"
+                  style={{ cursor: !message.text ? "not-allowed" : "pointer" }}
+                />
               </button>
-              {/* <button type="submit" disabled={!message.text}>
-                Send
-              </button> */}
             </form>
           ) : null}
         </div>

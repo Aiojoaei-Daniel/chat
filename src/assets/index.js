@@ -7,6 +7,13 @@ export { default as vlad } from "./ProfilPics/vlad.jpg";
 export { default as maria } from "./ProfilPics/maria.jpg";
 export { default as roxana } from "./ProfilPics/roxana.jpg";
 
-export { default as add } from "./Icons/add.svg";
-export { default as send } from "./Icons/send.svg";
-export { default as logout } from "./Icons/logout.svg";
+export { default as add } from "./Icons/add3.png";
+export { default as send } from "./Icons/send2.png";
+export { default as logout } from "./Icons/logout2.png";
+export { default as plus } from "./Icons/plus.svg";
+export { default as chat } from "./Icons/chat.png";
+export { default as contact } from "./Icons/contact.png";
+export { default as trash } from "./Icons/trash.svg";
+export { default as favorite } from "./Icons/star.png";
+export { default as info } from "./Icons/info.png";
+export { default as setting } from "./Icons/setting.png";

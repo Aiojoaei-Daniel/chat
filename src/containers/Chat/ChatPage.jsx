@@ -12,6 +12,7 @@ const ChatPage = () => {
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState();
   const [currentUser, setCurrentUser] = useState();
+  const [messages, setMessages] = useState({});
 
   useEffect(() => {
     const users = getUsers();
@@ -31,12 +32,15 @@ const ChatPage = () => {
         setSelectedUser={setSelectedUser}
         currentUser={currentUser}
         setCurrentUser={setCurrentUser}
+        messages={messages}
       />
       <MessageSection
         users={users}
         selectedUser={selectedUser}
         currentUser={currentUser}
         setCurrentUser={setCurrentUser}
+        messages={messages}
+        setMessages={setMessages}
       />
     </div>
   );

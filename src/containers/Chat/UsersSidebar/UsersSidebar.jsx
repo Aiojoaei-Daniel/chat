@@ -8,6 +8,7 @@ const UsersSidebar = ({
   selectedUser,
   setSelectedUser,
   currentUser,
+  messages,
 }) => {
   let filteredUsers = [];
   if (currentUser) {
@@ -22,7 +23,7 @@ const UsersSidebar = ({
       setSelectedUser(user);
     }
   };
-
+  console.log("messages de aici de la mn", messages);
   return (
     <div className="sidebar">
       <div className="search-bar"></div>
@@ -38,8 +39,34 @@ const UsersSidebar = ({
                   user?.name === selectedUser?.name ? "#3c374c" : null,
               }}
             >
-              <img src={user?.picture} alt="poza" />
-              <p>{user?.name}</p>
+              <div>
+                <img src={user?.picture} alt="poza" />
+                <p>{user?.name}</p>
+                <p className="time">
+                  {messages.hasOwnProperty(user.id + currentUser.id)
+                    ? messages[user.id + currentUser.id][
+                        messages[user.id + currentUser.id]?.length - 1
+                      ]?.time
+                    : null}
+                </p>
+              </div>
+              {messages.hasOwnProperty(user.id + currentUser.id) ? (
+                <p>
+                  {
+                    messages[user.id + currentUser.id][
+                      messages[user.id + currentUser.id].length - 1
+                    ].sender
+                  }
+                  :{" "}
+                  {
+                    messages[user.id + currentUser.id][
+                      messages[user.id + currentUser.id].length - 1
+                    ].text
+                  }
+                </p>
+              ) : (
+                <p>Nu sunt mesaje</p>
+              )}
             </div>
           ))
         ) : (
