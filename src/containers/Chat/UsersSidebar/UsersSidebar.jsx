@@ -16,11 +16,9 @@ const UsersSidebar = ({
   const [searchValue, setSearchValue] = useState("");
 
   const handleSelectedFriend = (user) => {
-    if (user?.name === selectedFriend?.name) {
-      setSelectedFriend();
-    } else {
-      setSelectedFriend(user);
-    }
+    return user?.name === selectedFriend?.name
+      ? setSelectedFriend()
+      : setSelectedFriend(user);
   };
 
   return currentUser ? (

@@ -1,6 +1,7 @@
 .search-bar {
   display: flex;
   width: 94%;
+  /* height: 20vh; */
 }
 
 .search-icon {

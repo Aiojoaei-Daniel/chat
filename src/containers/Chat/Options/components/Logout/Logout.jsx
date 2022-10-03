@@ -6,7 +6,6 @@ import { OPTIONS } from "./../copy";
 import "./logout.css";
 
 const Logout = ({ logout, setCurrentUser, setSelectedFriend, setMessages }) => {
-  console.log(typeof logout);
   const handleUser = () => {
     setSelectedFriend();
     setMessages({});

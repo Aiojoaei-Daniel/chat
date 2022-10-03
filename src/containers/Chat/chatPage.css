@@ -5,3 +5,12 @@
   grid-template-columns: 0.8fr 1.5fr 2fr;
   background: #312c40;
 }
+
+@media screen and (max-width: 900px) {
+  .chat-page {
+    grid-template-columns: 1.5fr 2fr;
+  }
+  .options-container {
+    display: none;
+  }
+}

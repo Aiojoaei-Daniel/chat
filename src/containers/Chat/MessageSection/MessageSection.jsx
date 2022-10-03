@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 
 import {
   TextSection,
-  CurrentUserInfo,
   FriendInfo,
   MessageInput,
+  CurrentUserInfo,
 } from "./components";
 
 import { DATA_KEY_NAME, STORAGE_PATH } from "./copy";
@@ -13,10 +13,10 @@ import { DATA_KEY_NAME, STORAGE_PATH } from "./copy";
 import "./messageSection.css";
 
 const MessageSection = ({
-  selectedFriend,
-  currentUser,
   messages,
   setMessages,
+  currentUser,
+  selectedFriend,
 }) => {
   const [message, setMessage] = useState({});
 
@@ -55,6 +55,8 @@ const MessageSection = ({
   useEffect(() => {
     setMessageToLocalStorage();
 
+    // if an update occurs in local storage,
+    // it will call a function to update our state
     window.addEventListener(STORAGE_PATH, onStorageUpdate);
 
     return () => {
@@ -68,7 +70,9 @@ const MessageSection = ({
 
     let [hoursPrefix, minutesPrefix] = ["", ""];
 
+    // 3:20 => 03:20
     if (time.getHours() < 10) hoursPrefix = "0";
+    // 03:5 => 03:05
     if (time.getMinutes() < 10) minutesPrefix = "0";
 
     setMessage({
@@ -110,15 +114,15 @@ const MessageSection = ({
         <div className="chat-section">
           <FriendInfo selectedFriend={selectedFriend} />
           <TextSection
-            selectedFriend={selectedFriend}
+            dummy={dummy}
             messages={messages}
             currentUser={currentUser}
-            dummy={dummy}
+            selectedFriend={selectedFriend}
           />
           <MessageInput
             message={message}
-            handleSendMessage={handleSendMessage}
             handleMessage={handleMessage}
+            handleSendMessage={handleSendMessage}
           />
         </div>
       ) : (
