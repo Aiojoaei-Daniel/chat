@@ -1,0 +1,15 @@
+.no-user-selected {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  margin: 20px;
+
+  background: #2d2839;
+}
+
+.no-user-selected > p {
+  color: white;
+  font-size: large;
+  text-align: center;
+}

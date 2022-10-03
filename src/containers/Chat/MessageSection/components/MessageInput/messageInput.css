@@ -1,0 +1,60 @@
+.message-input {
+  display: flex;
+  align-items: flex-end;
+
+  width: 100%;
+  height: 15vh;
+}
+
+.message-input > div > img {
+  width: 2rem;
+  height: 2rem;
+  object-fit: cover;
+}
+.message-input > button > img {
+  width: 2rem;
+  height: 2rem;
+  object-fit: cover;
+}
+
+.message-input > input {
+  height: 4rem;
+  width: 84%;
+
+  border: 0;
+  font-size: 1rem;
+  padding-left: 15px;
+
+  color: white;
+  background-color: #3c374c;
+}
+.message-input > input:focus {
+  outline: none;
+}
+
+.message-input > button {
+  border: none;
+}
+
+.add {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 4rem;
+  width: 4rem;
+
+  background-color: #3c374c;
+  cursor: pointer;
+}
+
+.send {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 4rem;
+  width: 4rem;
+
+  background-color: #3c374c;
+}

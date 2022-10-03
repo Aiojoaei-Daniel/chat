@@ -1,0 +1,31 @@
+.logout {
+  display: flex;
+  align-items: center;
+  width: 50%;
+  height: 40px;
+
+  margin-bottom: 10px;
+  padding-left: 10px;
+
+  color: white;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.logout > img {
+  width: 27px;
+  height: 27px;
+
+  margin-right: 13px;
+}
+
+.logout p,
+img {
+  cursor: pointer;
+  color: white;
+}
+
+.logout > p {
+  margin: 0;
+  padding: 5px;
+}

@@ -1,0 +1,19 @@
+.options > p {
+  display: flex;
+  align-items: center;
+
+  margin: 0;
+  height: 4.3rem;
+  padding-left: 15px;
+
+  color: white;
+  cursor: pointer;
+}
+
+.options > p:hover {
+  background-color: #3c374c;
+}
+
+.options > p > img {
+  margin-right: 20px;
+}

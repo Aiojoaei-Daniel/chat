@@ -1,87 +1,89 @@
 import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 
-import { add, send, usersIcon, phone, video, more } from "../../../assets";
+import {
+  TextSection,
+  CurrentUserInfo,
+  FriendInfo,
+  MessageInput,
+} from "./components";
+
+import { DATA_KEY_NAME, STORAGE_PATH } from "./copy";
+
 import "./messageSection.css";
 
 const MessageSection = ({
-  users,
-  selectedUser,
+  selectedFriend,
   currentUser,
-  setCurrentUser,
   messages,
   setMessages,
 }) => {
   const [message, setMessage] = useState({});
+
   const dummy = useRef();
+  const key = currentUser?.id + selectedFriend?.id;
 
   const onStorageUpdate = (storageData) => {
     const { key, newValue } = storageData;
 
-    if (key === "messages") {
+    if (key === DATA_KEY_NAME) {
       setMessages(JSON.parse(newValue));
     }
   };
 
   useEffect(() => {
     let newMessages = {};
+
     if (
       currentUser?.id &&
-      selectedUser?.id &&
-      !messages.hasOwnProperty(currentUser.id + selectedUser.id)
+      selectedFriend?.id &&
+      !messages.hasOwnProperty(key)
     ) {
       newMessages = {
         ...messages,
-        [currentUser.id + selectedUser.id]: [{}],
+        [key]: [{}],
       };
 
-      localStorage.setItem("messages", JSON.stringify(newMessages));
+      localStorage.setItem(DATA_KEY_NAME, JSON.stringify(newMessages));
     } else {
-      localStorage.setItem("messages", JSON.stringify(messages));
+      localStorage.setItem(DATA_KEY_NAME, JSON.stringify(messages));
     }
 
-    console.log(newMessages, messages);
-
-    window.addEventListener("storage", onStorageUpdate);
+    window.addEventListener(STORAGE_PATH, onStorageUpdate);
     return () => {
-      window.removeEventListener("storage", onStorageUpdate);
+      window.removeEventListener(STORAGE_PATH, onStorageUpdate);
     };
-  }, [messages, selectedUser]);
-
-  const handleCurrentUser = (user) => {
-    setCurrentUser(user);
-  };
+  }, [messages, selectedFriend]);
 
   const handleMessage = (event) => {
     const message = event.target.value;
     const time = new Date();
-    let [hours, minutes] = ["", ""];
-    console.log(typeof time.getHours());
-    if (time.getHours() < 10) hours = "0";
-    if (time.getMinutes() < 10) minutes = "0";
+
+    let [hoursPrefix, minutesPrefix] = ["", ""];
+
+    if (time.getHours() < 10) hoursPrefix = "0";
+    if (time.getMinutes() < 10) minutesPrefix = "0";
+
     setMessage({
       sender: currentUser.name,
       text: message,
-      time: `${hours}${time.getHours()}:${minutes}${time.getMinutes()}`,
+      time: `${hoursPrefix}${time.getHours()}:${minutesPrefix}${time.getMinutes()}`,
     });
   };
 
   const handleSendMessage = (event) => {
     event.preventDefault();
 
-    const data = JSON.parse(localStorage.getItem("messages"));
+    const data = JSON.parse(localStorage.getItem(DATA_KEY_NAME));
 
     const newMessages = {
       ...data,
-      [currentUser.id + selectedUser.id]: [
-        ...data[currentUser.id + selectedUser.id],
-        message,
-      ],
+      [key]: [...data[key], message],
     };
 
-    localStorage.setItem("messages", JSON.stringify(newMessages));
+    localStorage.setItem(DATA_KEY_NAME, JSON.stringify(newMessages));
 
-    const updatedData = JSON.parse(localStorage.getItem("messages"));
+    const updatedData = JSON.parse(localStorage.getItem(DATA_KEY_NAME));
 
     setMessages(updatedData);
 
@@ -93,118 +95,34 @@ const MessageSection = ({
   };
 
   return (
-    <div className="chat-info">
-      {!currentUser ? (
-        <div className="container-users">
-          <div className="users-title">
-            <p>Users</p>
-            <img src={usersIcon} alt="users icon" />
-          </div>
-          <div className="select-user">
-            {users.map((user, index) => (
-              <p key={index} onClick={() => handleCurrentUser(user)}>
-                {user.name}
-              </p>
-            ))}
-          </div>
+    <div className="chat-container">
+      {selectedFriend ? (
+        <div className="chat-section">
+          <FriendInfo selectedFriend={selectedFriend} />
+          <TextSection
+            selectedFriend={selectedFriend}
+            messages={messages}
+            currentUser={currentUser}
+            dummy={dummy}
+          />
+          <MessageInput
+            message={message}
+            handleSendMessage={handleSendMessage}
+            handleMessage={handleMessage}
+          />
         </div>
       ) : (
-        <div className="chat-section">
-          {selectedUser ? (
-            <div className="selected-user-info">
-              <div className="info">
-                <img src={selectedUser?.picture} alt="" />
-                <p>{selectedUser?.name}</p>
-              </div>
-              <div className="contact-friend">
-                <img src={phone} alt="" />
-                <img src={video} alt="" />
-                <img src={more} alt="" />
-              </div>
-            </div>
-          ) : null}
-          <div
-            className="message-section"
-            style={{
-              display: !selectedUser ? "flex" : "block",
-              justifyContent: !selectedUser ? "center" : null,
-              alignItems: !selectedUser ? "flex-end" : null,
-            }}
-          >
-            {!selectedUser ? (
-              <div className="current-user-details">
-                <img src={currentUser?.picture} alt="Current User Picture" />
-                <p>{currentUser?.name}</p>
-                <p>Incepe conversatia cu unul din prietenii tai.</p>
-              </div>
-            ) : messages.hasOwnProperty(currentUser.id + selectedUser.id) ? (
-              messages[currentUser.id + selectedUser.id].map(
-                (message, index) => (
-                  <div
-                    className="container-message"
-                    style={{
-                      display: "flex",
-                      justifyContent:
-                        message.sender === currentUser.name
-                          ? "flex-end"
-                          : "flex-start",
-                    }}
-                  >
-                    {message.text ? (
-                      <div
-                        key={index}
-                        className="message"
-                        style={{
-                          backgroundColor:
-                            message.sender === currentUser.name
-                              ? "#3c374c"
-                              : "#5C42AC",
-                        }}
-                      >
-                        <p>{message?.text}</p>
-                      </div>
-                    ) : null}
-                    <p>{message?.time}</p>
-                  </div>
-                )
-              )
-            ) : null}
-            <div
-              style={{
-                height: "2rem",
-              }}
-              ref={dummy}
-            ></div>
-          </div>
-          {selectedUser ? (
-            <form onSubmit={handleSendMessage} className="message-input">
-              <div className="add">
-                <img src={add} alt="add icon" />
-              </div>
-              <input
-                type="text"
-                name=""
-                onChange={handleMessage}
-                placeholder="Type a message..."
-                value={Object.keys(message).length !== 0 ? message.text : ""}
-              />
-              <button className="send" type="submit" disabled={!message.text}>
-                <img
-                  src={send}
-                  alt="send icon"
-                  style={{ cursor: !message.text ? "not-allowed" : "pointer" }}
-                />
-              </button>
-            </form>
-          ) : null}
-        </div>
+        <CurrentUserInfo currentUser={currentUser} />
       )}
     </div>
   );
 };
 
 MessageSection.propTypes = {
-  users: PropTypes.array,
+  messages: PropTypes.object,
+  currentUser: PropTypes.any,
+  selectedFriend: PropTypes.any,
+  setMessages: PropTypes.func,
 };
 
 export default MessageSection;

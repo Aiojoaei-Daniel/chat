@@ -1,0 +1,40 @@
+.search-bar {
+  display: flex;
+  width: 94%;
+}
+
+.search-icon {
+  display: flex;
+  align-items: center;
+
+  height: 8vh;
+  width: 3rem;
+  margin-right: 10px;
+
+  background-color: #302c40;
+}
+
+.search-icon > img {
+  height: 25px;
+  width: 25px;
+}
+
+.search-input {
+  height: 8vh;
+  width: 100%;
+
+  border: none;
+  font-size: 1rem;
+  padding: 5px 15px;
+
+  color: white;
+  background-color: #302c40;
+}
+
+.search-input::placeholder {
+  color: white;
+}
+
+.search-input:focus {
+  outline: none;
+}

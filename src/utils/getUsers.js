@@ -13,42 +13,42 @@ export const getUsers = () => {
   const users = [
     {
       name: "Florin",
-      id: 1,
+      id: 7110,
       picture: florin,
     },
     {
       name: "Ana",
-      id: 2,
+      id: 9551,
       picture: ana,
     },
     {
       name: "Daniel",
-      id: 3,
+      id: 6529,
       picture: dan,
     },
     {
       name: "Marian",
-      id: 4,
+      id: 5011,
       picture: marian,
     },
     {
       name: "Calin",
-      id: 5,
+      id: 2624,
       picture: calin,
     },
     {
       name: "Vlad",
-      id: 6,
+      id: 4524,
       picture: vlad,
     },
     {
       name: "Maria",
-      id: 7,
+      id: 9719,
       picture: maria,
     },
     {
       name: "Roxana",
-      id: 8,
+      id: 2485,
       picture: roxana,
     },
   ];

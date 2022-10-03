@@ -1,0 +1,60 @@
+.container-users {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 100vh;
+}
+
+.container-users > .users-title > p {
+  margin: 0;
+  color: white;
+  font-size: x-large;
+}
+
+.users-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 15vh;
+}
+
+.users-title > img {
+  width: 35px;
+  height: 35px;
+  margin-left: 15px;
+}
+
+.select-user {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  height: 60vh;
+
+  color: white;
+  overflow-y: auto;
+}
+
+.select-user > p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  min-height: 5rem;
+  margin: 0;
+  font-size: large;
+}
+.select-user > p:hover {
+  cursor: pointer;
+  background-color: #3c374c;
+}
+
+.select-user::-webkit-scrollbar {
+  width: 0.8rem;
+}
+
+.select-user::-webkit-scrollbar-thumb {
+  background: #3c374c;
+  border-radius: 3px;
+}
