@@ -3,4 +3,5 @@ export const USERS_LIST = {
   SIGN_IN: "Sign in",
   NO_USERS_MESSAGE:
     "Have the most interesting conversations with your friends.",
+  NO_USERS_FOUND: "No users found.",
 };

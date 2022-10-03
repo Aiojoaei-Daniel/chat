@@ -58,3 +58,8 @@
   background: #3c374c;
   border-radius: 3px;
 }
+
+.no-users-found {
+  color: white;
+  font-size: large;
+}

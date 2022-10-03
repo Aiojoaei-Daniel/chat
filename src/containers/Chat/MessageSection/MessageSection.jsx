@@ -31,7 +31,7 @@ const MessageSection = ({
     }
   };
 
-  useEffect(() => {
+  const setMessageToLocalStorage = () => {
     let newMessages = {};
 
     if (
@@ -39,6 +39,8 @@ const MessageSection = ({
       selectedFriend?.id &&
       !messages.hasOwnProperty(key)
     ) {
+      // create a new conversation with a selected friend
+
       newMessages = {
         ...messages,
         [key]: [{}],
@@ -48,8 +50,13 @@ const MessageSection = ({
     } else {
       localStorage.setItem(DATA_KEY_NAME, JSON.stringify(messages));
     }
+  };
+
+  useEffect(() => {
+    setMessageToLocalStorage();
 
     window.addEventListener(STORAGE_PATH, onStorageUpdate);
+
     return () => {
       window.removeEventListener(STORAGE_PATH, onStorageUpdate);
     };
@@ -74,6 +81,7 @@ const MessageSection = ({
   const handleSendMessage = (event) => {
     event.preventDefault();
 
+    // get old messages from local storage to add new message to them
     const data = JSON.parse(localStorage.getItem(DATA_KEY_NAME));
 
     const newMessages = {
@@ -81,6 +89,7 @@ const MessageSection = ({
       [key]: [...data[key], message],
     };
 
+    // update local storage with new messages and get updated messages so we can access them in a new tab
     localStorage.setItem(DATA_KEY_NAME, JSON.stringify(newMessages));
 
     const updatedData = JSON.parse(localStorage.getItem(DATA_KEY_NAME));
@@ -89,6 +98,7 @@ const MessageSection = ({
 
     setMessage({});
 
+    // automatically scroll to the bottom when a new message is sent
     dummy.current.scrollIntoView({
       behavior: "smooth",
     });

@@ -30,35 +30,41 @@ const UsersList = ({
 
   return (
     <div className="sidebar-users">
-      {sortedUsers.map((user) => (
-        <div
-          key={user.id}
-          className="sidebar-user"
-          onClick={() => handleSelectedFriend(user)}
-          style={{
-            backgroundColor:
-              user?.name === selectedFriend?.name ? "#3c374c" : null,
-          }}
-        >
-          <div className="user-info time">
-            <img src={user?.picture} alt="user-pic" />
-            <p style={{ textAlign: "start" }}>{user?.name}</p>
-            <p className="time">
-              {messages.hasOwnProperty(user.id + currentUser.id)
-                ? getData(user, "time")
-                : null}
-            </p>
+      {sortedUsers.length === 0 ? (
+        <p className="no-users-found">{USERS_LIST.NO_USERS_FOUND}</p>
+      ) : (
+        sortedUsers.map((user) => (
+          <div
+            key={user.id}
+            className="sidebar-user"
+            onClick={() => handleSelectedFriend(user)}
+            style={{
+              backgroundColor:
+                user?.name === selectedFriend?.name ? "#3c374c" : null,
+            }}
+          >
+            <div className="user-info time">
+              <img src={user?.picture} alt="user-pic" />
+              <p style={{ textAlign: "start" }}>{user?.name}</p>
+              <p className="time">
+                {messages.hasOwnProperty(user.id + currentUser.id)
+                  ? getData(user, "time")
+                  : null}
+              </p>
+            </div>
+            {messages.hasOwnProperty(user.id + currentUser.id) &&
+            // if the number of messages in the conversation is greater than 1
+            // then display last message in user's sidebar
+            messages[user.id + currentUser.id].length > 1 ? (
+              <p>
+                {getData(user, "sender")}: {getData(user, "text")}
+              </p>
+            ) : (
+              <p>{USERS_LIST.NO_MESSAGES}</p>
+            )}
           </div>
-          {messages.hasOwnProperty(user.id + currentUser.id) &&
-          messages[user.id + currentUser.id].length > 1 ? (
-            <p>
-              {getData(user, "sender")}: {getData(user, "text")}
-            </p>
-          ) : (
-            <p>{USERS_LIST.NO_MESSAGES}</p>
-          )}
-        </div>
-      ))}
+        ))
+      )}
     </div>
   );
 };
