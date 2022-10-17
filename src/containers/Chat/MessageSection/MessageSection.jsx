@@ -8,7 +8,7 @@ import {
   CurrentUserInfo,
 } from "./components";
 
-import { DATA_KEY_NAME, STORAGE_PATH } from "./copy";
+import { COLLECTION_NAME, STORAGE_PATH } from "./copy";
 
 import "./messageSection.css";
 
@@ -26,7 +26,7 @@ const MessageSection = ({
   const onStorageUpdate = (storageData) => {
     const { key, newValue } = storageData;
 
-    if (key === DATA_KEY_NAME) {
+    if (key === COLLECTION_NAME) {
       setMessages(JSON.parse(newValue));
     }
   };
@@ -46,9 +46,9 @@ const MessageSection = ({
         [key]: [{}],
       };
 
-      localStorage.setItem(DATA_KEY_NAME, JSON.stringify(newMessages));
+      localStorage.setItem(COLLECTION_NAME, JSON.stringify(newMessages));
     } else {
-      localStorage.setItem(DATA_KEY_NAME, JSON.stringify(messages));
+      localStorage.setItem(COLLECTION_NAME, JSON.stringify(messages));
     }
   };
 
@@ -86,7 +86,7 @@ const MessageSection = ({
     event.preventDefault();
 
     // get old messages from local storage to add new message to them
-    const data = JSON.parse(localStorage.getItem(DATA_KEY_NAME));
+    const data = JSON.parse(localStorage.getItem(COLLECTION_NAME));
 
     const newMessages = {
       ...data,
@@ -94,9 +94,9 @@ const MessageSection = ({
     };
 
     // update local storage with new messages and get updated messages so we can access them in a new tab
-    localStorage.setItem(DATA_KEY_NAME, JSON.stringify(newMessages));
+    localStorage.setItem(COLLECTION_NAME, JSON.stringify(newMessages));
 
-    const updatedData = JSON.parse(localStorage.getItem(DATA_KEY_NAME));
+    const updatedData = JSON.parse(localStorage.getItem(COLLECTION_NAME));
 
     setMessages(updatedData);
 
